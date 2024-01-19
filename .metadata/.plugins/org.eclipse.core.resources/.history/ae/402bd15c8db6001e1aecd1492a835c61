@@ -1,0 +1,54 @@
+package com.app.entity;
+
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity
+@Table(name="job_postings")
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class JobPosting {
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		private Integer id;
+		
+		@Column(name="job_title", length=40, nullable=false)
+		private String jobTitle;
+		
+		@Column(name="company_name", length=30, unique=true, nullable=false)
+		private String companyName;
+		
+		@Column(length=30, nullable=false)
+		private String location;
+		
+		@Column(length=30, nullable=false)
+		private String description;
+		
+		@Column(name="manufacture_date")
+		@DateTimeFormat(pattern = "yyyy-MM-dd")
+		private LocalDate manufactureDate;
+		
+		@Enumerated(EnumType.STRING)
+		@Column(name="category", length=30)
+		private Category category;		
+}

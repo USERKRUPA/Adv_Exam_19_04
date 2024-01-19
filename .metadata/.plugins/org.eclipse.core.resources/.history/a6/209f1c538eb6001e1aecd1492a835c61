@@ -1,0 +1,46 @@
+package com.app.dto;
+
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.app.entity.Category;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class JobPostingDto {
+	private String jobTitle;
+	
+	@Column(name="company_name", length=30, unique=true, nullable=false)
+	private String companyName;
+	
+	@Column(length=30, nullable=false)
+	private String location;
+	
+	@Column(length=100, nullable=false)
+	private String description;
+	
+	@Column(length=100, nullable=false)
+	private String requirements;
+	
+	private double salary;
+	
+	@Column(name="posting_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate postingDate;
+}

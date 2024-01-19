@@ -1,0 +1,26 @@
+package com.app.dto;
+
+import java.time.LocalDate;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class JobPostingDto {
+	
+	private Long id;
+	private String jobTitle;
+	private String companyName;
+	private String location;
+	private String description;
+	private String requirements;
+	private double salary;
+	private LocalDate postingDate;
+}

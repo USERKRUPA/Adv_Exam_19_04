@@ -1,0 +1,46 @@
+package com.app.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.app.custom_exception.ApiException;
+import com.app.dao.JobPostingRepository;
+import com.app.dto.JobPostingDto;
+import com.app.entity.JobPosting;
+
+@Service
+@Transactional
+public class JobPostingServiceImpl implements JobPostingService {
+
+	@Autowired
+	private JobPostingRepository jobPostingRepo;
+	
+	@Autowired
+	private ModelMapper mapper;
+	
+	@Override
+	public String addProduct(JobPostingDto productDto) {
+		JobPosting product = mapper.map(productDto, JobPosting.class);
+		if(productRepo.existsByCode(product.getCode())){
+			throw new ApiException("product already exists");
+		}
+		JobPosting persistentProduct = productRepo.save(product);
+		if(persistentProduct !=null)
+			return "product added";
+		return "product not added";
+	}
+
+	@Override
+	public List<JobPostingDto> getAllProducts() {
+		List<JobPosting> productList= productRepo.findAll();
+		return productList.stream()
+			.map(product->mapper.map(product, JobPostingDto.class))
+			.collect(Collectors.toList());
+	}
+
+}

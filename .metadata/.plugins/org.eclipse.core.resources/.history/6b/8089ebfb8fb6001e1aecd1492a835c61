@@ -1,0 +1,23 @@
+package com.app.service;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import com.app.dto.JobPostingDto;
+
+public interface JobPostingService {
+	//add product to table
+		String addProduct(JobPostingDto productDto);
+		
+		//get all products
+		List<JobPostingDto> getAllProducts();
+
+		String addNewJobPosting(@Valid JobPostingDto newJobPostingDto);
+
+		List<JobPostingDto> getAllJobPostings();
+
+		String updateJobPosting(Long jobId);
+
+		String removeJobPosting(Long jobId);
+}
